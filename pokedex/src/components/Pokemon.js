@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
 
 export const Pokemon = ({ obj }) => {
   const [pokemonData, setPokemonData] = useState(null);
@@ -14,18 +19,36 @@ export const Pokemon = ({ obj }) => {
     getPokemonData();
   }, [obj]);
   return (
-    <div>
-      <div>{obj.name}</div>
-      <div>Abilities:</div>
-      <ul style={{ listStyle: "none" }}>
-        {pokemonData?.abilities.length !== 0
-          ? pokemonData?.abilities.map((ability) => (
-              <li key={ability.ability.name}>{ability.ability.name}</li>
-            ))
-          : null}
-      </ul>
-      <div>Photo:</div>
-      <img src={`${pokemonData?.sprites.front_default}`} alt={obj.name} />
-    </div>
+    <Card sx={{ maxWidth: 345, margin: "0 auto", bgcolor: "#c3c12f" }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="300"
+          image={`${pokemonData?.sprites.front_default}`}
+          alt={obj.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h3" component="div">
+            {obj.name}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            style={{ listStyle: "none" }}
+          >
+            <span
+              style={{ fontSize: "20px", fontWeight: "bold", color: "black" }}
+            >
+              Abilities:
+            </span>
+            {pokemonData?.abilities.length !== 0
+              ? pokemonData?.abilities.map((ability) => (
+                  <li key={ability.ability.name}>{ability.ability.name}</li>
+                ))
+              : null}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
