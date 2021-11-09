@@ -1,13 +1,22 @@
-import "./App.css";
-import { CreatePokedex } from "./components/CreatePokedex";
+import { Routes, Route } from "react-router-dom";
 import { useGetPokemon } from "./hooks/useGetPokemon";
+import { CreatePokedex } from "./components/CreatePokedex";
 
 function App() {
-  useGetPokemon();
+  const pokemonRoutes = useGetPokemon();
+  console.log(7, pokemonRoutes);
+
   return (
-    <div className="App">
-      <CreatePokedex />
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<CreatePokedex />} />
+        {pokemonRoutes.map((el) => {
+          return (
+            <Route path={`pokemons/${el.name}`} element={<CreatePokedex />} />
+          );
+        })}
+      </Routes>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { useGetPokemon } from "../hooks/useGetPokemon";
-// import { useGetPokemon } from "../hooks/useGetPokemon";
 
 export const CreatePokedex = () => {
   const [filterData, setFilterData] = useState("");
@@ -9,19 +9,22 @@ export const CreatePokedex = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setFilterData(e.target.value);
+    console.log(e.target.value);
     return filterData;
   };
-
+  let params = useParams();
+  console.log(params);
   return (
-    <>
+    <div className="App" style={{ textAlign: "center" }}>
       <input type="text" onChange={handleChange} />
+
       {pokemons.map((el, i) => {
         return (
           <div key={i}>
-            <p>{el.name}</p>
+            <NavLink to={`/pokemons/${el.name}`}>{el.name}</NavLink>
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
