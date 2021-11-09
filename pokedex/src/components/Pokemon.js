@@ -19,7 +19,7 @@ export const Pokemon = ({ obj }) => {
     getPokemonData();
   }, [obj]);
   return (
-    <Card sx={{ maxWidth: 345, margin: "0 auto", bgcolor: "#c3c12f" }}>
+    <Card sx={{ maxWidth: 345, margin: "0 auto", bgcolor: "#c0c0c0" }}>
       <CardActionArea>
         <CardMedia
           component="img"
