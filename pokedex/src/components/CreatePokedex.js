@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useGetPokemon } from "../hooks/useGetPokemon";
 
 export const CreatePokedex = () => {
@@ -7,13 +7,12 @@ export const CreatePokedex = () => {
   const pokemons = useGetPokemon();
 
   const handleChange = (e) => {
-    e.preventDefault();
+    // e.preventDefault();git
     setFilterData(e.target.value);
     console.log(e.target.value);
     return filterData;
   };
-  let params = useParams();
-  console.log(params);
+
   return (
     <div className="App" style={{ textAlign: "center" }}>
       <input type="text" onChange={handleChange} />
@@ -21,10 +20,11 @@ export const CreatePokedex = () => {
       {pokemons.map((el, i) => {
         return (
           <div key={i}>
-            <NavLink to={`/pokemons/${el.name}`}>{el.name}</NavLink>
+            <NavLink to={`pokemons/${el.name}`}>{el.name}</NavLink>
           </div>
         );
       })}
+      <Outlet />
     </div>
   );
 };

@@ -1,18 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 import { useGetPokemon } from "./hooks/useGetPokemon";
 import { CreatePokedex } from "./components/CreatePokedex";
+import { Pokemon } from "./components/Pokemon";
 
 function App() {
   const pokemonRoutes = useGetPokemon();
-  console.log(7, pokemonRoutes);
-
   return (
     <>
       <Routes>
         <Route path="/" element={<CreatePokedex />} />
         {pokemonRoutes.map((el) => {
           return (
-            <Route path={`pokemons/${el.name}`} element={<CreatePokedex />} />
+            <Route
+              key={el.name}
+              path={`pokemons/${el.name}`}
+              element={<Pokemon obj={el} />}
+            />
           );
         })}
       </Routes>
